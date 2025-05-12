@@ -1,63 +1,43 @@
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
 public class Main {
     public static void main(String[] args) {
         try {
-            // טעינת מוצרים ומכירות
             List<Product> products = ProductLoaderFromCSV.load("src/products.csv");
             SalesData salesData = new SalesData("src/sales.csv");
-            Inventory inventory = new Inventory(products);
 
-            int daysBack = 14;
-            int topN = 3;
+            InsightStrategy shelfStrategy = new ShelfTimeStrategy(30);
+            InsightStrategy salesDropStrategy = new SalesDropStrategy();
 
-            // Best Sellers (כללי)
-            System.out.println("=== 🏆 Top " + topN + " Best Sellers (All Brands) ===");
-            List<Product> topSellers = inventory.getTopSellingProducts(topN, daysBack, salesData, Optional.empty());
-            for (Product p : topSellers) {
-                int sold = salesData.getSoldSince(p.getSku(), LocalDate.now().minusDays(daysBack));
-                System.out.printf("- [%s] %s (%s): Sold %d units%n", p.getSku(), p.getModel(), p.getBrand(), sold);
+            System.out.println("=== 📊 Insights from ShelfTimeStrategy ===");
+            for (Product product : products) {
+                shelfStrategy.analyze(product, salesData, LocalDate.now())
+                        .ifPresent(System.out::println);
             }
 
-            // מוצרים שלא נמכרו
-            System.out.println("\n=== ❌ Unsold Products (Last " + daysBack + " Days) ===");
-            List<Product> unsold = inventory.getUnsoldProductsWithinPeriod(daysBack, salesData);
-            for (Product p : unsold) {
-                System.out.printf("- [%s] %s (%s)%n", p.getSku(), p.getModel(), p.getBrand());
+            System.out.println("\n=== 📉 Insights from SalesDropStrategy ===");
+            for (Product product : products) {
+                salesDropStrategy.analyze(product, salesData, LocalDate.now())
+                        .ifPresent(System.out::println);
             }
 
-            // Best Sellers לפי מותג
-            System.out.println("\n=== 🏆 Top " + topN + " Nike Best Sellers ===");
-            List<Product> nikeSellers = inventory.getTopSellingProducts(topN, daysBack, salesData, Optional.of("Nike"));
-            for (Product p : nikeSellers) {
-                int sold = salesData.getSoldSince(p.getSku(), LocalDate.now().minusDays(daysBack));
-                System.out.printf("- [%s] %s: Sold %d units%n", p.getSku(), p.getModel(), sold);
-            }
-
-            // בדיקת תקינות כוללת (Sanity Check)
-            runSanityCheck(products, salesData, daysBack);
+            System.out.println("\n=== 🏆 Best Sellers ===");
+            products.stream()
+                    .sorted(Comparator.comparingInt(
+                            p -> -salesData.getSoldSince(p.getSku(), LocalDate.now().minusDays(30)))
+                    )
+                    .limit(5)
+                    .forEach(p -> {
+                        int sold = salesData.getSoldSince(p.getSku(), LocalDate.now().minusDays(30));
+                        System.out.println(p.getModel() + " (" + p.getSku() + ") - Sold: " + sold + " units");
+                    });
 
         } catch (IOException e) {
-            System.out.println("שגיאה בטעינת הקבצים: " + e.getMessage());
-        } catch (IllegalArgumentException e) {
-            System.out.println("קלט שגוי: " + e.getMessage());
+            System.err.println("⚠️ Error loading data: " + e.getMessage());
         }
-    }
-
-    public static void runSanityCheck(List<Product> products, SalesData salesData, int daysBack) {
-        System.out.println("\n=== ✅ Sanity Check: Products + Sales ===");
-
-        LocalDate threshold = LocalDate.now().minusDays(daysBack);
-
-        for (Product p : products) {
-            int sold = salesData.getSoldSince(p.getSku(), threshold);
-            System.out.printf("[%s] %-25s | %-10s | Sold: %-3d | Stock: %-3d%n",
-                    p.getSku(), p.getModel(), p.getBrand(), sold, p.getStock());
-        }
-
-        System.out.println("Total products loaded: " + products.size());
     }
 }

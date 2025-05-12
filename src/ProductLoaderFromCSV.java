@@ -14,15 +14,15 @@ public class ProductLoaderFromCSV {
         while ((line = reader.readLine()) != null) {
             if (line.trim().isEmpty()) continue;
             String[] values = line.split(",");
-            if (values.length != 5) continue;
+            if (values.length != 6) continue;
 
             String sku = values[0].trim();
             String model = values[1].trim();
             String brand = values[2].trim();
             double price = Double.parseDouble(values[3].trim());
             int stock = Integer.parseInt(values[4].trim());
-
-            Product p = new Product(sku, model, brand, price, stock);
+            LocalDate dateAdded = LocalDate.parse(values[5].trim());
+            Product p = new Product(sku, model, brand, price, stock,dateAdded);
             products.add(p);
         }
         reader.close();
