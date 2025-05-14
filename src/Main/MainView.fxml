@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="Main.MainController" styleClass="root-pane">
+
+    <top>
+        <VBox spacing="10" alignment="TOP_CENTER" styleClass="top-bar">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+
+            <Label text="RetailRadar - Product Insights"
+                   style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
+
+            <Label text="Welcome, Manager 👋"
+                   style="-fx-font-size: 14px; -fx-text-fill: #555;" />
+
+            <HBox spacing="10" alignment="CENTER">
+                <Button fx:id="loadButton" text="📂 Load CSV Files" styleClass="action-button"/>
+                <Button fx:id="shelfButton" text="📊 Shelf Time" styleClass="action-button"/>
+                <Button fx:id="dropButton" text="📉 Sales Drop" styleClass="action-button"/>
+                <Button fx:id="bestButton" text="🏆 Best Sellers" styleClass="action-button"/>
+                <ComboBox fx:id="brandFilter" promptText="All Brands" visible="false"
+                          prefWidth="200" prefHeight="32"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <TextArea fx:id="outputArea" wrapText="true" editable="false" styleClass="output-area"/>
+    </center>
+
+</BorderPane>

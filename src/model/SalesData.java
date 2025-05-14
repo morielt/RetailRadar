@@ -1,3 +1,5 @@
+package model;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -36,4 +38,12 @@ public class SalesData {
                 .mapToInt(SaleRecord::getQuantity)
                 .sum();
     }
+    public List<SaleRecord> getAllSales() {
+        List<SaleRecord> allSales = new ArrayList<>();
+        for (List<SaleRecord> list : salesMap.values()) {
+            allSales.addAll(list);
+        }
+        return allSales;
+    }
+
 }
