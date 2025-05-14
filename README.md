@@ -1,4 +1,4 @@
-# Retailradar
+# RetailRadar
 
 **From retail floor to real-time insights.**
 
