@@ -1,4 +1,4 @@
-# RetailRadar
+# Retailradar
 
 **From retail floor to real-time insights.**
 
@@ -59,8 +59,6 @@ Each insight runs independently, and logic is separated using the Strategy Patte
 
 Developed by Moriel Torgeman  
 Connect on [LinkedIn](https://www.linkedin.com/in/your-profile)  
-GitHub: [your-github-link]
-
 ---
 
 ## 📝 License
