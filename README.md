@@ -58,7 +58,7 @@ Each insight runs independently, and logic is separated using the Strategy Patte
 ## 🧑‍💻 Author
 
 Developed by Moriel Torgeman  
-Connect on [LinkedIn](https://www.linkedin.com/in/your-profile)  
+Connect on [LinkedIn](https://www.linkedin.com/in/morielturgeman/)
 ---
 
 ## 📝 License
