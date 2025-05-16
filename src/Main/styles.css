@@ -1,5 +1,5 @@
 .top-bar {
-    -fx-background-color: #e5e7eb; /* אפור בהיר ונעים */
+    -fx-background-color: #e5e7eb; 
     -fx-padding: 15;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 6, 0.2, 0, 2);
     -fx-border-radius: 8;
