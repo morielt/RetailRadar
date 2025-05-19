@@ -150,9 +150,9 @@ public class MainController {
 
         InsightStrategy strategy = new SalesDropStrategy();
         StringBuilder sb = new StringBuilder("📉 Sales Drop Insight\n");
-        sb.append("Products with strong recent demand but now slow down – consider pricing or promotion\n\n");
+        sb.append("Products with declining sales – check inventory availability and restocking delays\n\n");
 
-        sb.append("Products with strong recent demand but now slow down – consider pricing or promotion\n\n");
+        sb.append("If inventory is sufficient, consider price adjustments or promotional strategies\n\n");
 
         boolean found = false;
         for (Product product : products) {

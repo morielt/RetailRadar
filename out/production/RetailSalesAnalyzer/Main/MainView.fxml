@@ -13,7 +13,7 @@
                 <Insets top="10" right="10" bottom="10" left="10"/>
             </padding>
 
-            <Label text="RetailRadar - Product Insights"
+            <Label text="Retailradar - Product Insights"
                    style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
 
             <Label text="Welcome, Manager 👋"
