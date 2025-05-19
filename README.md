@@ -55,19 +55,10 @@ Each insight runs independently, and logic is separated using the Strategy Patte
 
 ---
 
-## 🖼 Screenshot
-
-![RetailRadar Screenshot](./path/to/Screenshot.png)  
-*Main view of the RetailRadar application*
-
----
-
 ## 🧑‍💻 Author
 
 Developed by Moriel Torgeman  
-Connect on [LinkedIn](https://www.linkedin.com/in/your-profile)  
-GitHub: [your-github-link]
-
+Connect on [LinkedIn](https://www.linkedin.com/in/morielturgeman/)
 ---
 
 ## 📝 License
